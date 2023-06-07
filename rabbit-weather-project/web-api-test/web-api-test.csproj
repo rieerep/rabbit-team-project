@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\rabbit-weather-project\web-api\web-api.csproj" />
+    <ProjectReference Include="..\web-api\web-api.csproj" />
   </ItemGroup>
 
 </Project>
