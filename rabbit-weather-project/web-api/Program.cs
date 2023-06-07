@@ -13,7 +13,7 @@ namespace web_api
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
-			var app = builder.Build();
+			var app = builder.Build(); 
 
 			// GET Method to check health status
 			app.MapGet("/healthcheck", () => "Connection is working with server.");
@@ -43,7 +43,7 @@ namespace web_api
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
+			// app.UseHttpsRedirection();
 
 			app.Run();
 		}
