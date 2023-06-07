@@ -43,7 +43,7 @@ namespace web_api
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
+			// app.UseHttpsRedirection();
 
 			app.Run();
 		}
