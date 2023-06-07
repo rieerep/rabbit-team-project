@@ -1,22 +1,33 @@
 using Microsoft.AspNetCore.Mvc.Testing;
+using System.Diagnostics;
+using System.Net.Http;
 
 namespace web_api_test
 {
+	internal record HealthStatus(string Status);
+	// Skriv ett nytt typ av record enligt ovan med väderdata
+	// Skriv sedan ett test med rätt typ av data
+	// Glöm inte att starta API:et med dotnet watch innan man kör testerna
 	public class web_apiTest
 	{
-		[Fact]
-		public async Task TestEndpoint_WhenUsing_Something()
+		private readonly HttpClient _httpClient = new()
 		{
+			BaseAddress = new Uri("http://localhost:20400")
+		};
 
-			await using var application = new WebApplicationFactory<Program>();
-			using var client = application.CreateClient();
+		[Fact]
+		public async Task GivenARequest_WhenCallingHealthCheck_ThenTheAPIReturnsExpectedResponse()
+		{
+			// Arrange.
+			var expectedStatusCode = System.Net.HttpStatusCode.OK;
+			var expectedContent = new HealthStatus ("Connection is working with server.");
+			var stopwatch = Stopwatch.StartNew();
 
-			var response = await client.GetStringAsync("/health-test");
-			var temp = await client.GetStringAsync("/temperature");
+			// Act.
+			var response = await _httpClient.GetAsync("/healthcheck");
 
-
-			// Assert
-			Assert.Equal("Hello World!", response);
+			// Assert.
+			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
 		}
 	}
 }

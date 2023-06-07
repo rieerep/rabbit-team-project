@@ -16,7 +16,7 @@ namespace web_api
 			var app = builder.Build(); 
 
 			// GET Method to check health status
-			app.MapGet("/healthcheck", () => "Connection is working with server.");
+			app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
 
 			var summaries = new[]
 			{
