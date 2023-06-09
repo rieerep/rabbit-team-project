@@ -18,6 +18,10 @@ namespace web_api
 			// GET Method to check health status
 			app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
 
+			// GET Method to check weather temp
+			app.MapGet("/weatherdata", () => new { Temp = 19 })
+				.WithName("GetWeatherHardcoded");
+
 			var summaries = new[]
 			{
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
