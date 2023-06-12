@@ -4,6 +4,9 @@ using System.Net.Http;
 
 namespace web_api_test
 {
+
+	//TESTING OÙT STUFF
+
 	internal record HealthStatus(string Status);
 	internal record WeatherTemp (int Temp);
 	// Skriv ett nytt typ av record enligt ovan med väderdata
