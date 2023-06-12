@@ -23,24 +23,23 @@ namespace web_api
 			app.MapGet("/weatherdata", () => new { Temp = 19 })
 				.WithName("GetWeatherHardcoded");
 
-			app.MapGet("/weatherdata2", () => new
+			app.MapGet("/currentweather", () => new
 			{
-				Weather = new[]
-				{
-					new
+				Weather = new[] {
+				new 
 				{
 					name = "stockholm",
 					weather = "sunny",
 					wind = 15.0
 				},
-					new
+				new 
 				{
 					name = "eskilstuna",
 					weather = "cloudy",
 					wind = 3.2
 				}
 				}
-				});
+			});
 
 			var summaries = new[]
 			{
@@ -72,7 +71,6 @@ namespace web_api
 			app.Run();
 		}
 	}
-
 }
 
 // The reason why you need this partial class definition,

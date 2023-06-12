@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Diagnostics;
 using System.Net.Http;
+using web_api;
 
 namespace web_api_test
 {
@@ -8,6 +9,8 @@ namespace web_api_test
 
 	internal record HealthStatus(string Status);
 	internal record WeatherTemp (int Temp);
+	internal record CurrentWeather(GetWeather currentWeather);
+
 	// Skriv ett nytt typ av record enligt ovan med väderdata
 	// Skriv sedan ett test med rätt typ av data
 	// Glöm inte att starta API:et med dotnet watch innan man kör testerna
@@ -44,6 +47,32 @@ namespace web_api_test
 
 			// Act
 			var response = await _httpClient.GetAsync("/weatherdata");
+
+			// Assert
+			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+
+		}
+
+		[Fact]
+		public async Task CurrentWeather_GivenARequest_WhenCallingTempCheck_ThenAPIReturnsExptectedResponse()
+		{
+			// Arrange 
+			var expectedStatusCode = System.Net.HttpStatusCode.OK;
+			
+			GetWeather getweather = new GetWeather()
+			{
+				name = "stockholm",
+				temp = 25,
+				humidity = 50
+			};
+
+			var expectedContent = new CurrentWeather(getweather);
+			var stopwatch = Stopwatch.StartNew();
+
+
+			// Act
+			var response = await _httpClient.GetAsync("/currentweather");
+
 
 			// Assert
 			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
