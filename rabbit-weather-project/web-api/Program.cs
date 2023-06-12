@@ -13,10 +13,33 @@ namespace web_api
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
-			var app = builder.Build(); 
+			var app = builder.Build();
 
 			// GET Method to check health status
 			app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
+
+			// GET Method to check weather temp
+			app.MapGet("/weatherdata", () => new { Temp = 19 })
+				.WithName("GetWeatherHardcoded");
+
+			app.MapGet("/weatherdata2", () => new
+			{
+				Weather = new[]
+				{
+					new
+				{
+					name = "stockholm",
+					weather = "sunny",
+					wind = 15.0
+				},
+					new
+				{
+					name = "eskilstuna",
+					weather = "cloudy",
+					wind = 3.2
+				}
+				}
+				});
 
 			var summaries = new[]
 			{
