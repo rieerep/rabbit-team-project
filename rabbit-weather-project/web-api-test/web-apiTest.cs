@@ -5,6 +5,7 @@ using System.Net.Http;
 namespace web_api_test
 {
 	internal record HealthStatus(string Status);
+	internal record WeatherTemp (int Temp);
 	// Skriv ett nytt typ av record enligt ovan med väderdata
 	// Skriv sedan ett test med rätt typ av data
 	// Glöm inte att starta API:et med dotnet watch innan man kör testerna
@@ -28,6 +29,23 @@ namespace web_api_test
 
 			// Assert.
 			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+		}
+
+		[Fact]
+		public async Task Temperature_GivenARequest_WhenCallingTempCheck_ThenAPIReturnsExptectedResponse()
+		{
+			// Arrange 
+			var expectedStatusCode = System.Net.HttpStatusCode.OK;
+			var expectedContent = new WeatherTemp(19);
+			var stopwatch = Stopwatch.StartNew();
+
+
+			// Act
+			var response = await _httpClient.GetAsync("/weatherdata");
+
+			// Assert
+			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+
 		}
 	}
 }
