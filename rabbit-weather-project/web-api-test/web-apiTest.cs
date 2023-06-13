@@ -11,7 +11,7 @@ namespace web_api_test
 
     // Skriv ett nytt typ av record enligt ovan med väderdata
     // Skriv sedan ett test med rätt typ av data
-    // Glöm inte att starta API:et med dotnet watch innan man kör testerna
+    // Glöm inte att starta API:et med dotnet watch innan man kör testern
     public class web_apiTest
 	{  
 
