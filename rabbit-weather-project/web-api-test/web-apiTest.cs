@@ -50,7 +50,7 @@ namespace web_api_test
 
 
 			// Act
-			var response = await _httpClient.GetAsync("/weatherata");
+			var response = await _httpClient.GetAsync("/weatherdata");
 
 			// Assert
 			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
