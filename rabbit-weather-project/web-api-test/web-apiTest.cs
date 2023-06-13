@@ -5,8 +5,6 @@ using web_api;
 
 namespace web_api_test
 {
-	// Test
-
 	internal record HealthStatus(string Status);
 	internal record WeatherTemp (int Temp);
 	internal record CurrentWeather (GetCurrentWeather Temp);
@@ -15,7 +13,7 @@ namespace web_api_test
     // Skriv sedan ett test med rätt typ av data
     // Glöm inte att starta API:et med dotnet watch innan man kör testerna
     public class web_apiTest
-	{
+	{   
 
         public static string? CustomPort = Environment.GetEnvironmentVariable("CUSTOMPORT");
 
