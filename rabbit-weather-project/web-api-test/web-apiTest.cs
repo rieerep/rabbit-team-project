@@ -17,14 +17,15 @@ namespace web_api_test
     public class web_apiTest
 	{
 
-		// SPACE LOL
+        public static string? CustomPort = Environment.GetEnvironmentVariable("CUSTOMPORT");
 
-		private readonly HttpClient _httpClient = new()
-		{
-			BaseAddress = new Uri("http://localhost:20400")
-		};
+        private readonly HttpClient _httpClient = new()
+        {
 
-		[Fact]
+            BaseAddress = new Uri($"http://localhost:{(string.IsNullOrEmpty(CustomPort) ? "20400" : CustomPort)}")
+        };
+
+        [Fact]
 		public async Task GivenARequest_WhenCallingHealthCheck_ThenTheAPIReturnsExpectedResponse()
 		{
 			// Arrange.
@@ -49,7 +50,7 @@ namespace web_api_test
 
 
 			// Act
-			var response = await _httpClient.GetAsync("/weatherdata");
+			var response = await _httpClient.GetAsync("/weatherata");
 
 			// Assert
 			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
