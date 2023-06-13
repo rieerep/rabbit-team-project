@@ -42,7 +42,7 @@ namespace web_api_test
 
 		[Fact]
 		public async Task Temperature_GivenARequest_WhenCallingTempCheck_ThenAPIReturnsExptectedResponse()
-		{
+		{    
 			// Arrange 
 			var expectedStatusCode = System.Net.HttpStatusCode.OK;
 			var expectedContent = new WeatherTemp(19);
