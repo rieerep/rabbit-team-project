@@ -13,7 +13,7 @@ namespace web_api_test
     // Skriv sedan ett test med rätt typ av data
     // Glöm inte att starta API:et med dotnet watch innan man kör testerna
     public class web_apiTest
-	{   
+	{   //Comment
 
         public static string? CustomPort = Environment.GetEnvironmentVariable("CUSTOMPORT");
 
