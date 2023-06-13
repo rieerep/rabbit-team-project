@@ -23,29 +23,29 @@ namespace web_api
 			app.MapGet("/weatherdata", () => new { Temp = 19 })
 				.WithName("GetWeatherHardcoded");
 
-			app.MapGet("/weatherdata2", () => new
+			app.MapGet("/currentweather", () => new
 			{
 				Weather = new[]
 				{
 					new
-				{
-					name = "stockholm",
-					weather = "sunny",
-					wind = 15.0
-				},
+					{
+						name = "stockholm",
+						weather = "sunny",
+						wind = 15.0
+					},
 					new
-				{
-					name = "eskilstuna",
-					weather = "cloudy",
-					wind = 3.2
+					{
+						name = "eskilstuna",
+						weather = "cloudy",
+						wind = 3.2
+					}
 				}
-				}
-				});
+			});
 
 			var summaries = new[]
 			{
 			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-		};
+			};
 			app.MapGet("/weatherforecast", (HttpContext httpContext) =>
 			{
 				var forecast = Enumerable.Range(1, 5).Select(index =>
@@ -73,6 +73,11 @@ namespace web_api
 		}
 	}
 
+    
+}
+
+public class GetCurrentWeather
+{
 }
 
 // The reason why you need this partial class definition,
