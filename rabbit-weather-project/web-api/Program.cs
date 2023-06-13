@@ -14,10 +14,13 @@ namespace web_api
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
-			var app = builder.Build();
+            builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
-			// GET Method to check health status
-			app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
+            var app = builder.Build();
+            app.UseCors();
+
+            // GET Method to check health status
+            app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
 
 			// GET Method to check weather temp
 			app.MapGet("/weatherdata", () => new { Temp = 19 })
