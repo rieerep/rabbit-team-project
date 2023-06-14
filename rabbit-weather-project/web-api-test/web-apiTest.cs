@@ -59,15 +59,31 @@ namespace web_api_test
         {
             // Arrange 
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
-            var expectedContent = new WeatherTemp(19);
-            var stopwatch = Stopwatch.StartNew();
+            var expectedContent = new
+			{
+				weather = new[] {
+				new
+				{
+					name = "stockholm",
+					weather = "sunny",
+					wind = 15.0
+				},
+				new
+				{
+					name = "eskilstuna",
+					weather = "cloudy",
+					wind = 3.2
+				}
+				}
+			};
+			var stopwatch = Stopwatch.StartNew();
 
 
             // Act
-            var response = await _httpClient.GetAsync("/weatherdata");
+            var response = await _httpClient.GetAsync("/currentweather");
 
             // Assert
-            await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+            await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
 
         }
     }
