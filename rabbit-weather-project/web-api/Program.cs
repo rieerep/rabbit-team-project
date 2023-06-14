@@ -76,9 +76,6 @@ namespace web_api
     
 }
 
-public class GetCurrentWeather
-{
-}
 
 // The reason why you need this partial class definition,
 // is that by default the Program.cs file is compiled into a private class Program,
