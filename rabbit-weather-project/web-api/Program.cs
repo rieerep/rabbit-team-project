@@ -44,6 +44,8 @@ namespace web_api
                 }
             });
 
+            app.MapGet("/callcounter", () => new { Count = 5 });
+
             var summaries = new[]
             {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
