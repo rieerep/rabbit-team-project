@@ -1,18 +1,18 @@
 namespace web_api
 {
-	//XXXX
-	public class Program //zzz
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
+    //XXXX
+    public class Program //zzz
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
-			builder.Services.AddAuthorization();
+            // Add services to the container.
+            builder.Services.AddAuthorization();
 
-			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
@@ -22,59 +22,60 @@ namespace web_api
             // GET Method to check health status
             app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
 
-			// GET Method to check weather temp
-			app.MapGet("/weatherdata", () => new { Temp = 19 })
-				.WithName("GetWeatherHardcoded");
+            // GET Method to check weather temp
+            app.MapGet("/weatherdata", () => new { Temp = 19 })
+                .WithName("GetWeatherHardcoded");
 
-			app.MapGet("/currentweather", () => new
-			{
-				Weather = new[] {
-				new 
-				{
-					name = "stockholm",
-					weather = "sunny",
-					wind = 15.0
-				},
-				new 
-				{
-					name = "eskilstuna",
-					weather = "cloudy",
-					wind = 3.2
-				}
-				}
-			});
+            app.MapGet("/currentweather", () => new
+            {
+                Weather = new[] {
+                new
+                {
+                    name = "stockholm",
+                    weather = "sunny",
+                    wind = 15.0
+                },
+                new
+                {
+                    name = "eskilstuna",
+                    weather = "cloudy",
+                    wind = 3.2
+                }
+                }
+            });
 
-			var summaries = new[]
-			{
-			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-		};
-			app.MapGet("/weatherforecast", (HttpContext httpContext) =>
-			{
-				var forecast = Enumerable.Range(1, 5).Select(index =>
-					new WeatherForecast
-					{
-						Date = DateTime.Now.AddDays(index),
-						TemperatureC = Random.Shared.Next(-20, 55),
-						Summary = summaries[Random.Shared.Next(summaries.Length)]
-					})
-					.ToArray();
-				return forecast;
-			})
-			.WithName("GetWeatherForecast");
+            var summaries = new[]
+            {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            };
+            app.MapGet("/weatherforecast", (HttpContext httpContext) =>
+            {
+                var forecast = Enumerable.Range(1, 5).Select(index =>
+                    new WeatherForecast
+                    {
+                        Date = DateTime.Now.AddDays(index),
+                        TemperatureC = Random.Shared.Next(-20, 55),
+                        Summary = summaries[Random.Shared.Next(summaries.Length)]
+                    })
+                    .ToArray();
+                return forecast;
+            })
+            .WithName("GetWeatherForecast");
 
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
-			// app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
-			app.Run();
-		}
-	}
+            app.Run();
+        }
+    }
 }
+
 
 // The reason why you need this partial class definition,
 // is that by default the Program.cs file is compiled into a private class Program,
@@ -82,8 +83,8 @@ namespace web_api
 public partial class Program { }
 public class WeatherForecast
 {
-	public DateTime Date { get; set; }
-	public int TemperatureC { get; set; }
-	public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-	public string? Summary { get; set; }
+    public DateTime Date { get; set; }
+    public int TemperatureC { get; set; }
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public string? Summary { get; set; }
 }
