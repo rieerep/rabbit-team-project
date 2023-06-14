@@ -86,5 +86,25 @@ namespace web_api_test
             await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
 
         }
-    }
+
+		[Fact]
+		public async Task APICallCounter_GivenARequest_WhenCallingCallCounter_ThenAPIReturnsExptectedResponse()
+		{
+			// Arrange 
+			var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            var expectedContent = new
+            {
+                count = 5
+            };
+			var stopwatch = Stopwatch.StartNew();
+
+
+			// Act
+			var response = await _httpClient.GetAsync("/callcounter");
+
+			// Assert
+			await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+
+		}
+	}
 }
