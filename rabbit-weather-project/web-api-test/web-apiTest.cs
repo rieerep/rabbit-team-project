@@ -5,15 +5,14 @@ using web_api;
 
 namespace web_api_test
 {
-	internal record HealthStatus(string Status);
-	internal record WeatherTemp (int Temp);
-	internal record CurrentWeather (GetCurrentWeather Temp);
+    internal record HealthStatus(string Status);
+    internal record WeatherTemp(int Temp);
 
-    // Skriv ett nytt typ av record enligt ovan med väderdata
-    // Skriv sedan ett test med rätt typ av data
-    // Glöm inte att starta API:et med dotnet watch innan man kör testern
+    // Skriv ett nytt typ av record enligt ovan med vï¿½derdata
+    // Skriv sedan ett test med rï¿½tt typ av data
+    // Glï¿½m inte att starta API:et med dotnet watch innan man kï¿½r testern
     public class web_apiTest
-	{  
+    {
 
         public static string? CustomPort = Environment.GetEnvironmentVariable("CUSTOMPORT");
 
@@ -24,36 +23,36 @@ namespace web_api_test
         };
 
         [Fact]
-		public async Task GivenARequest_WhenCallingHealthCheck_ThenTheAPIReturnsExpectedResponse()
-		{
-			// Arrange.
-			var expectedStatusCode = System.Net.HttpStatusCode.OK;
-			var expectedContent = new HealthStatus ("Connection is working with server.");
-			var stopwatch = Stopwatch.StartNew();
+        public async Task GivenARequest_WhenCallingHealthCheck_ThenTheAPIReturnsExpectedResponse()
+        {
+            // Arrange.
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            var expectedContent = new HealthStatus("Connection is working with server.");
+            var stopwatch = Stopwatch.StartNew();
 
-			// Act.
-			var response = await _httpClient.GetAsync("/healthcheck");
+            // Act.
+            var response = await _httpClient.GetAsync("/healthcheck");
 
-			// Assert.
-			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
-		}
+            // Assert.
+            await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+        }
 
-		[Fact]
-		public async Task Temperature_GivenARequest_WhenCallingTempCheck_ThenAPIReturnsExptectedResponse()
-		{    
-			// Arrange 
-			var expectedStatusCode = System.Net.HttpStatusCode.OK;
-			var expectedContent = new WeatherTemp(19);
-			var stopwatch = Stopwatch.StartNew();
+        [Fact]
+        public async Task Temperature_GivenARequest_WhenCallingTempCheck_ThenAPIReturnsExptectedResponse()
+        {
+            // Arrange 
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            var expectedContent = new WeatherTemp(19);
+            var stopwatch = Stopwatch.StartNew();
 
 
-			// Act
-			var response = await _httpClient.GetAsync("/weatherdata");
+            // Act
+            var response = await _httpClient.GetAsync("/weatherdata");
 
-			// Assert
-			await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+            // Assert
+            await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
 
-		}
+        }
 
         [Fact]
         public async Task Temperature_GivenARequest_WhenCallingCurrentWeather_ThenAPIReturnsExptectedResponse()
