@@ -1,10 +1,21 @@
 namespace web_api
 {
-    
+
+    public static class Global
+    {
+        public static int count = 0;
+
+        public static void IncrementCounter()
+        {
+            count++;
+        }
+    }
+
     public class Program
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -20,32 +31,46 @@ namespace web_api
             app.UseCors();
 
             // GET Method to check health status
-            app.MapGet("/healthcheck", () => new { Status = "Connection is working with server." });
+            app.MapGet("/healthcheck", () =>
+            {
+                Global.IncrementCounter();
+                return new { Status = "Connection is working with server." };
+            });
 
             // GET Method to check weather temp
-            app.MapGet("/weatherdata", () => new { Temp = 19 })
-                .WithName("GetWeatherHardcoded");
-
-            app.MapGet("/currentweather", () => new
+            app.MapGet("/weatherdata", () =>
             {
-                Weather = new[] {
-                new
+                Global.IncrementCounter();
+                return new { Temp = 19 };
+            }).WithName("GetWeatherHardcoded");
+
+            app.MapGet("/currentweather", () =>{ 
+                Global.IncrementCounter();
+
+                return new
                 {
-                    name = "stockholm",
-                    weather = "sunny",
-                    wind = 15.0
-                },
-                new
-                {
-                    name = "eskilstuna",
-                    weather = "cloudy",
-                    wind = 3.2
-                }
-                }
+                    Weather = new[]{
+                        new
+                        {
+                            name = "stockholm",
+                            weather = "sunny",
+                            wind = 15.0
+                        },
+                        new
+                        {
+                            name = "eskilstuna",
+                            weather = "cloudy",
+                            wind = 3.2
+                        }
+                    }
+                };
             });
 
             // GET Method to check number of API calls
-            app.MapGet("/callcounter", () => new { Count = 5 });
+            app.MapGet("/callcounter", () => {
+                Global.IncrementCounter();
+                return new { calls = Global.count };
+            });
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

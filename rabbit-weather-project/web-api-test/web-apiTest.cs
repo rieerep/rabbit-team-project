@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http;
 using web_api;
@@ -87,24 +88,47 @@ namespace web_api_test
 
         }
 
-		[Fact]
-		public async Task APICallCounter_GivenARequest_WhenCallingCallCounter_ThenAPIReturnsExptectedResponse()
-		{
-			// Arrange 
-			var expectedStatusCode = System.Net.HttpStatusCode.OK;
-            var expectedContent = new
-            {
-                count = 5
-            };
-			var stopwatch = Stopwatch.StartNew();
+		//[Fact]
+		//public async Task APICallCounter_GivenARequest_WhenCallingCallCounter_ThenAPIReturnsExptectedResponse()
+		//{
+		//	// Arrange 
+		//	var expectedStatusCode = System.Net.HttpStatusCode.OK;
+  //          var expectedContent = new
+  //          {
+  //              count = 5
+  //          };
+		//	var stopwatch = Stopwatch.StartNew();
 
 
-			// Act
-			var response = await _httpClient.GetAsync("/callcounter");
+		//	// Act
+		//	var response = await _httpClient.GetAsync("/callcounter");
 
-			// Assert
-			await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+		//	// Assert
+		//	await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
 
-		}
-	}
+		//}
+
+        [Fact]
+        public async Task APICallCounter_TestIfIncreses()
+        {
+            // Arrange 
+            //var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            var expectedMinCalls = 1;
+            var stopwatch = Stopwatch.StartNew();
+
+
+            // Act
+            var response = await _httpClient.GetAsync("/callcounter");
+            var content = await response.Content.ReadAsStringAsync(); //takes api JSON repsonse result and assigns it to var content
+            var responseObject = JObject.Parse(content); //JObject is a way to take JSON data and parse it so it can be accessed and used/manipulated in c#
+            var actualCalls = (int)responseObject["calls"];//the int in the beginning means that we are typecasting string into int and then accessing that int with the
+                                                           //name calls and the value is the number we are looking for to compare against our expected lowest numbner
+
+
+            // Assert
+            Assert.True(response.IsSuccessStatusCode);//if status code is between 200 and 299 it will return ture and assert is passed
+            Assert.True(actualCalls >= expectedMinCalls);//if calls number is equal to or greater than 1 (so not 0) it will pass
+
+        }
+    }
 }
