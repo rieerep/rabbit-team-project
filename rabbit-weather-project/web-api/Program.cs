@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace web_api
 {
 
@@ -9,6 +11,7 @@ namespace web_api
         {
             count++;
         }
+
     }
 
     public class Program
@@ -28,6 +31,25 @@ namespace web_api
             builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             var app = builder.Build();
+
+            var Weather = new[]
+            {
+                        new
+                        {
+                            name = "stockholm",
+                            weather = "sunny",
+                            wind = 15.0
+                        },
+                        new
+                        {
+                            name = "eskilstuna",
+                            weather = "cloudy",
+                            wind = 3.2
+                        }
+            };
+
+            
+
             app.UseCors();
 
             // GET Method to check health status
@@ -47,23 +69,7 @@ namespace web_api
             app.MapGet("/currentweather", () =>{ 
                 Global.IncrementCounter();
 
-                return new
-                {
-                    Weather = new[]{
-                        new
-                        {
-                            name = "stockholm",
-                            weather = "sunny",
-                            wind = 15.0
-                        },
-                        new
-                        {
-                            name = "eskilstuna",
-                            weather = "cloudy",
-                            wind = 3.2
-                        }
-                    }
-                };
+                return Weather;
             });
 
             // GET Method to check number of API calls
@@ -74,18 +80,15 @@ namespace web_api
 
             // GET Method to check number of API calls
             app.MapGet("/add/city/{favoriteCity}", (string favoriteCity) => {
-                return new
+                Global.IncrementCounter();
+                var city = Weather.Where(x => x.name == favoriteCity.ToLower());
+                if (city is null)
                 {
-                    Weather = new[] {
-                        new
-                        {
-                            name = "stockholm",
-                            weather = "sunny",
-                            wind = 15.0,
-                            isFavorite = true
-                        }
-                    }
-                };
+                    return Results.NotFound(new { message = "Could not find city" });
+                }
+
+                //var pinnedCity = Weather.Where(x => x.name == favoriteCity.ToLower());
+                return Results.Ok(new { message = $"You added: {favoriteCity}" });
             });
 
             // Configure the HTTP request pipeline.
