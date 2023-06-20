@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http;
@@ -114,7 +115,6 @@ namespace web_api_test
             // Arrange 
             //var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var expectedMinCalls = 1;
-            var stopwatch = Stopwatch.StartNew();
 
 
             // Act
@@ -133,17 +133,21 @@ namespace web_api_test
 
         [Theory]
         [InlineData("asd")]
-        public async Task AddsFavoriteCity_WhenRequestedByClient(string city)
+        public async Task AddsFavoriteCity_WhenRequestedByClient(string favCity)
         {
             // Arrange 
-            var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var stopwatch = Stopwatch.StartNew();
-            var expectedContent = new { message = $"You added: {city}" };
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            
+            var expectedContent = new { message = $"You added: {favCity}" };
+
 
             // Act
-            var response = await _httpClient.GetAsync($"/add/city/{city}");
+            var response = await _httpClient.GetAsync($"/add/city/{favCity}");
+
 
             // Assert
+            //Assert.Equal(expectedContent, actual);
             await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
         }
     }
