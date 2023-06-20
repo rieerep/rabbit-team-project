@@ -69,7 +69,7 @@ namespace web_api
             app.MapGet("/currentweather", () =>{ 
                 Global.IncrementCounter();
 
-                return Weather;
+                return new { Weather } ;
             });
 
             // GET Method to check number of API calls
@@ -86,8 +86,6 @@ namespace web_api
                 {
                     return Results.NotFound(new { message = "Could not find city" });
                 }
-
-                //var pinnedCity = Weather.Where(x => x.name == favoriteCity.ToLower());
                 return Results.Ok(new { message = $"You added: {favoriteCity}" });
             });
 

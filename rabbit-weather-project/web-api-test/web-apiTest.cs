@@ -131,27 +131,17 @@ namespace web_api_test
 
         }
 
-        [Fact]
-        public async Task AddsFavoriteCity_WhenRequestedByClient()
+        [Theory]
+        [InlineData("asd")]
+        public async Task AddsFavoriteCity_WhenRequestedByClient(string city)
         {
             // Arrange 
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var stopwatch = Stopwatch.StartNew();
-            var expectedContent = new
-            {
-                weather = new[] {
-                    new
-                    {
-                        name = "stockholm",
-                        weather = "sunny",
-                        wind = 15.0,
-                        isFavorite = true
-                    }
-                }
-            };
+            var expectedContent = new { message = $"You added: {city}" };
 
             // Act
-            var response = await _httpClient.GetAsync("/add/city/stockholm");
+            var response = await _httpClient.GetAsync($"/add/city/{city}");
 
             // Assert
             await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
