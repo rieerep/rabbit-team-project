@@ -137,13 +137,24 @@ namespace web_api_test
             // Arrange 
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var stopwatch = Stopwatch.StartNew();
-            var expectedContent = new { message = "Your favorite city is Stockholm" };
+            var expectedContent = new
+            {
+                weather = new[] {
+                    new
+                    {
+                        name = "stockholm",
+                        weather = "sunny",
+                        wind = 15.0,
+                        isFavorite = true
+                    }
+                }
+            };
 
             // Act
             var response = await _httpClient.GetAsync("/add/city/stockholm");
 
             // Assert
-            await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+            await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
         }
     }
 }

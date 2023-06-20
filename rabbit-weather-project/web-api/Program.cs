@@ -74,7 +74,18 @@ namespace web_api
 
             // GET Method to check number of API calls
             app.MapGet("/add/city/{favoriteCity}", (string favoriteCity) => {
-                return new { city = "stockholm" };
+                return new
+                {
+                    Weather = new[] {
+                        new
+                        {
+                            name = "stockholm",
+                            weather = "sunny",
+                            wind = 15.0,
+                            isFavorite = true
+                        }
+                    }
+                };
             });
 
             // Configure the HTTP request pipeline.
