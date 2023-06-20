@@ -1,11 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import styled from "styled-components";
 
+import Dropdown from './Components/Dropdown';
+import WeatherCard from './Components/WeatherCard';
+import Navbar from './Components/Navbar';
 import './App.css'
 
-  function clickMe() {
-     alert("Button clicked!");
-   }
+function clickMe() {
+  alert("Button clicked!");
+}
 
 function ApiCall() {
   const [data, setData] = React.useState([]);
@@ -25,7 +29,7 @@ function ApiCall() {
     <>
       <h3>
         {data.status}
-        </h3>
+      </h3>
     </>
   ) : (
     <>
@@ -51,7 +55,8 @@ function ApiStockholmWeather() {
   }, [])
 
   return weather ? (
-    <p>the weather in stockholm is {weather.temp} celcius</p>
+
+    <p>the weather in stockholm is {weather.temp} celcius. </p>
   ) : (
     <>
       <h1>weather data is loading</h1>
@@ -59,23 +64,25 @@ function ApiStockholmWeather() {
   )
 }
 
-function  App() {
+function App() {
   return (
     <>
+      <Navbar>
+        <h1>Rabbit Weather</h1>
+      </Navbar>
+
+      <p>Hello and welcome to the rabbit weather site.</p>
+      <ApiCall />
       <div>
-        <h1>Ridiculously Rabbid Rabbit Weather</h1>
-        <p>Hello and welcome to the rabbit weather site.</p>
-        <ApiCall />
-      </div>
-      <div>
+        <Dropdown></Dropdown>
         <button onClick={clickMe}>
           Button
         </button>
       </div>
-      <div>
+      <WeatherCard>
         <h3>Stockholm weather:</h3>
         <ApiStockholmWeather />
-      </div>
+      </WeatherCard>
 
     </>
   )
