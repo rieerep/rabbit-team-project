@@ -130,5 +130,20 @@ namespace web_api_test
             Assert.True(actualCalls >= expectedMinCalls);//if calls number is equal to or greater than 1 (so not 0) it will pass
 
         }
+
+        [Fact]
+        public async Task AddsFavoriteCity_WhenRequestedByClient()
+        {
+            // Arrange 
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            var stopwatch = Stopwatch.StartNew();
+            var expectedContent = "hej";
+
+            // Act
+            var response = await _httpClient.GetAsync("/add/city");
+
+            // Assert
+            await TestHelpers.AssertPartialResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+        }
     }
 }
