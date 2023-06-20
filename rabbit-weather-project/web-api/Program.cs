@@ -72,6 +72,11 @@ namespace web_api
                 return new { calls = Global.count };
             });
 
+            // GET Method to check number of API calls
+            app.MapGet("/add/city", () => {
+                return new { city = "stockholm" };
+            });
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

@@ -137,13 +137,16 @@ namespace web_api_test
             // Arrange 
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var stopwatch = Stopwatch.StartNew();
-            var expectedContent = "hej";
+            var expectedContent = new
+            {
+                city = "stockholm"
+            };
 
-            // Act
+            // Act asdasd
             var response = await _httpClient.GetAsync("/add/city");
 
             // Assert
-            await TestHelpers.AssertPartialResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
+            await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
         }
     }
 }
