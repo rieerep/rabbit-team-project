@@ -73,7 +73,7 @@ namespace web_api
             });
 
             // GET Method to check number of API calls
-            app.MapGet("/add/city", () => {
+            app.MapGet("/add/city/{favoriteCity}", (string favoriteCity) => {
                 return new { city = "stockholm" };
             });
 

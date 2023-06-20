@@ -93,10 +93,10 @@ namespace web_api_test
 		//{
 		//	// Arrange 
 		//	var expectedStatusCode = System.Net.HttpStatusCode.OK;
-  //          var expectedContent = new
-  //          {
-  //              count = 5
-  //          };
+        //          var expectedContent = new
+        //          {
+        //              count = 5
+        //          };
 		//	var stopwatch = Stopwatch.StartNew();
 
 
@@ -137,13 +137,10 @@ namespace web_api_test
             // Arrange 
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var stopwatch = Stopwatch.StartNew();
-            var expectedContent = new
-            {
-                city = "stockholm"
-            };
+            var expectedContent = new { message = "Your favorite city is Stockholm" };
 
-            // Act asdasd
-            var response = await _httpClient.GetAsync("/add/city");
+            // Act
+            var response = await _httpClient.GetAsync("/add/city/stockholm");
 
             // Assert
             await TestHelpers.AssertResponseWithContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
