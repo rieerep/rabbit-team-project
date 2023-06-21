@@ -16,7 +16,7 @@ function FavouriteCity() {
         console.log(evt);
         const selectedCity = FavCity.find((c) => c.name === city);
         if (selectedCity) {
-            console.log('selected city:', selectedCity);
+            console.log('Added city:', selectedCity);
             setFavSaved(prevFavSaved => [...prevFavSaved, selectedCity]);
         }
     };
@@ -34,10 +34,7 @@ function FavouriteCity() {
         fetchData();
     }, []);
 
-    React.useEffect(() => {
-        console.log('favSaved:', favSaved);
-    }, [favSaved]);
-
+    
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -52,10 +49,10 @@ function FavouriteCity() {
                         ))}
                     </select>
                 </label>
-                <button type="submit">Save</button>
+                <button type="submit"> Save </button>
             </form>
 
-            <h3>Current favourite cities</h3>
+            <h3>Current favourite cities:</h3>
             <div>
                 <ul>
                     {favSaved.map((city) => (
