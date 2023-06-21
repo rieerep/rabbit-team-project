@@ -6,6 +6,8 @@ import Dropdown from './Components/Dropdown';
 import WeatherCard from './Components/WeatherCard';
 import Navbar from './Components/Navbar';
 import './App.css'
+import * as css from './css-components/css-app'
+import FavouriteCity from './FavouriteCity'
 
 function clickMe() {
   alert("Button clicked!");
@@ -17,7 +19,9 @@ function ApiCall() {
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios("https://localhost:40400/healthcheck");
+
       console.log(result);
+
       setData(result.data);
     }
     fetchData()
@@ -40,14 +44,16 @@ function ApiCall() {
 }
 
 function ApiStockholmWeather() {
-
   const [weather, setWeather] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios("https://localhost:40400/weatherdata");
+
       console.log(result);
+
       setWeather(result.data);
+
     }
     fetchData()
 
@@ -65,6 +71,7 @@ function ApiStockholmWeather() {
 }
 
 function App() {
+
   return (
     <>
       <Navbar>
@@ -82,10 +89,13 @@ function App() {
       <WeatherCard>
         <h3>Stockholm weather:</h3>
         <ApiStockholmWeather />
+      <css.Favcity>
+        <FavouriteCity/>
+      </css.Favcity>
       </WeatherCard>
 
     </>
-  )
+  ) 
 }
 
 export default App
