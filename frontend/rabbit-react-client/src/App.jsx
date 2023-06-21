@@ -9,6 +9,7 @@ import CardList from './Components/CardList';
 import './App.css'
 import FavCityForm from './Components/FavCityForm';
 
+
 function clickMe() {
   alert("Button clicked!");
 }
@@ -18,7 +19,7 @@ function ApiCall() {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const result = await axios("https://localhost:40400/healthcheck");
+      const result = await axios("http://dev.kjeldcon.se:20400/healthcheck");
       console.log(result);
       setData(result.data);
     }
@@ -38,31 +39,6 @@ function ApiCall() {
 
   )
 }
-
-// function ApiStockholmWeather() {
-
-//   const [weather, setWeather] = React.useState([]);
-
-//   React.useEffect(() => {
-//     const fetchData = async () => {
-//       const result = await axios("https://localhost:40400/weatherdata");
-//       console.log(result);
-//       setWeather(result.data);
-//     }
-//     fetchData()
-
-//     //console.log(data)
-//   }, [])
-
-//   return weather ? (
-
-//     <p>the weather in stockholm is {weather.temp} celcius. </p>
-//   ) : (
-//     <>
-//       <h1>weather data is loading</h1>
-//     </>
-//   )
-// }
 
 function App() {
   return (

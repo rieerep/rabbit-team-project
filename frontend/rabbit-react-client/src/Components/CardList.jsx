@@ -12,7 +12,7 @@ export const CardListContainer = styled.div`
     align-items: center;
 `;
 
-export const GET_ALL_WEATHER_DATA = "https://localhost:40400/currentweather";
+export const GET_ALL_WEATHER_DATA = "http://dev.kjeldcon.se:20400/currentweather";
 
 function CardList() {
 

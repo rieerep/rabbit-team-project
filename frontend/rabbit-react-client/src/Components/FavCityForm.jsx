@@ -30,7 +30,7 @@ function FavCityForm() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const FavCityResult = await axios.get('https://localhost:40400/currentweather');
+                const FavCityResult = await axios.get('http://dev.kjeldcon.se:20400/currentweather');
                 console.log(FavCityResult);
                 setFavCity(FavCityResult.data);
             } catch (error) {
