@@ -5,17 +5,6 @@ import axios from "axios";
 
 const Dropdown = () => {
 
-    // const [city, setCity] = useState(' ');
-
-    // const allCities = [
-    //     {
-    //         city: "Stockholm"
-    //     },
-    //     {
-    //         city: "Eskilstuna"
-    //     }
-    // ]
-
     const [data, setData] = useState({ weather: [] });
 
     useEffect(() => {

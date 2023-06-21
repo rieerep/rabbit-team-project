@@ -51,7 +51,7 @@ namespace web_api
                         },
                         new
                         {
-                            name = "Borås",
+                            name = "Kiruna",
                             weather = "very bad",
                             wind = 100.0,
                             temp = -23

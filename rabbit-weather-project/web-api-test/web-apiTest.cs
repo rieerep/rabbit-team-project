@@ -68,15 +68,24 @@ namespace web_api_test
 				{
 					name = "stockholm",
 					weather = "sunny",
-					wind = 15.0
-				},
+					wind = 15.0,
+                    temp = 25
+                },
 				new
 				{
 					name = "eskilstuna",
 					weather = "cloudy",
-					wind = 3.2
-				}
-				}
+					wind = 3.2,
+                    temp = 19
+                },
+                new
+                {
+                    name = "Kiruna",
+                    weather = "very bad",
+                    wind = 100.0,
+                    temp = -23
+                }
+                }
 			};
 			var stopwatch = Stopwatch.StartNew();
 

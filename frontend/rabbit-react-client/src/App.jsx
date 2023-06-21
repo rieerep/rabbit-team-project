@@ -7,6 +7,7 @@ import Card from './Components/WeatherCard';
 import Navbar from './Components/Navbar';
 import CardList from './Components/CardList';
 import './App.css'
+import FavCityForm from './Components/FavCityForm';
 
 function clickMe() {
   alert("Button clicked!");
@@ -76,10 +77,7 @@ function App() {
       <CardList />
       <div>
         <h3>Add a favorite city here</h3>
-        <Dropdown></Dropdown>
-        <button onClick={clickMe}>
-          Button
-        </button>
+        <FavCityForm />
       </div>
 
     </>

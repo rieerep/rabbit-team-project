@@ -12,7 +12,7 @@ const CardListContainer = styled.div`
     align-items: center;
 `;
 
-const GET_ALL_WEATHER_DATA = "https://localhost:40400/currentweather";
+export const GET_ALL_WEATHER_DATA = "https://localhost:40400/currentweather";
 
 function CardList() {
 
