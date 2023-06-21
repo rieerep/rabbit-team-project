@@ -3,8 +3,9 @@ import axios from 'axios';
 import styled from "styled-components";
 
 import Dropdown from './Components/Dropdown';
-import WeatherCard from './Components/WeatherCard';
+import Card from './Components/WeatherCard';
 import Navbar from './Components/Navbar';
+import CardList from './Components/CardList';
 import './App.css'
 
 function clickMe() {
@@ -27,42 +28,40 @@ function ApiCall() {
 
   return data ? (
     <>
-      <h3>
-        {data.status}
-      </h3>
+      <h4>Server status: {data.status}</h4>
     </>
   ) : (
     <>
-      <h3>loading repsonse</h3>
+      <h3>Server status: no repsonse</h3>
     </>
 
   )
 }
 
-function ApiStockholmWeather() {
+// function ApiStockholmWeather() {
 
-  const [weather, setWeather] = React.useState([]);
+//   const [weather, setWeather] = React.useState([]);
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios("https://localhost:40400/weatherdata");
-      console.log(result);
-      setWeather(result.data);
-    }
-    fetchData()
+//   React.useEffect(() => {
+//     const fetchData = async () => {
+//       const result = await axios("https://localhost:40400/weatherdata");
+//       console.log(result);
+//       setWeather(result.data);
+//     }
+//     fetchData()
 
-    //console.log(data)
-  }, [])
+//     //console.log(data)
+//   }, [])
 
-  return weather ? (
+//   return weather ? (
 
-    <p>the weather in stockholm is {weather.temp} celcius. </p>
-  ) : (
-    <>
-      <h1>weather data is loading</h1>
-    </>
-  )
-}
+//     <p>the weather in stockholm is {weather.temp} celcius. </p>
+//   ) : (
+//     <>
+//       <h1>weather data is loading</h1>
+//     </>
+//   )
+// }
 
 function App() {
   return (
@@ -73,16 +72,15 @@ function App() {
 
       <p>Hello and welcome to the rabbit weather site.</p>
       <ApiCall />
+      <h2>Current weather</h2>
+      <CardList />
       <div>
+        <h3>Add a favorite city here</h3>
         <Dropdown></Dropdown>
         <button onClick={clickMe}>
           Button
         </button>
       </div>
-      <WeatherCard>
-        <h3>Stockholm weather:</h3>
-        <ApiStockholmWeather />
-      </WeatherCard>
 
     </>
   )

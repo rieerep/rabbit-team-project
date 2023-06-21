@@ -1,11 +1,24 @@
 import styled from "styled-components";
 
-export const WeatherCard = styled.div`
+const CardContainer = styled.div`
 display: flex;
 flex-direction: column;
 border: 2px solid red;
-top: 0, 0, 0;
+padding: 10px;
+border-radius: 10px;
+background-color: blueviolet;
 
-`
+`;
 
-export default WeatherCard
+function Card(props) {
+
+    return(
+        <CardContainer>
+            <h4>{props.name}</h4>
+            <p>{props.weather}</p>
+        </CardContainer>
+    );
+}
+export default Card;
+
+//export default WeatherCard
