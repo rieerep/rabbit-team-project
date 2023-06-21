@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 
 namespace web_api
@@ -38,13 +39,22 @@ namespace web_api
                         {
                             name = "stockholm",
                             weather = "sunny",
-                            wind = 15.0
+                            wind = 15.0,
+                            temp = 25
                         },
                         new
                         {
                             name = "eskilstuna",
                             weather = "cloudy",
-                            wind = 3.2
+                            wind = 3.2,
+                            temp = 19
+                        },
+                        new
+                        {
+                            name = "Borås",
+                            weather = "very bad",
+                            wind = 100.0,
+                            temp = -23
                         }
             };
 

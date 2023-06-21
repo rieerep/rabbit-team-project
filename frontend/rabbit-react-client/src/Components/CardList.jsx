@@ -31,7 +31,7 @@ function CardList() {
 
     return(
         <CardListContainer>
-            {data.weather.map(city => (<Card name={city.name} weather={city.weather}/>))}
+            {data.weather.map(city => (<Card name={city.name} temp={city.temp} weather={city.weather}/>))}
             
         </CardListContainer>
     );
