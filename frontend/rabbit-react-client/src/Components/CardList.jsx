@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Card from './WeatherCard';
 
-const CardListContainer = styled.div`
+export const CardListContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
