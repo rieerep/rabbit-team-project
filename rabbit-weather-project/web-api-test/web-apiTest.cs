@@ -132,7 +132,7 @@ namespace web_api_test
         }
 
         [Theory]
-        [InlineData("asd")]
+        [InlineData("stockholm")]
         public async Task AddsFavoriteCity_WhenRequestedByClient(string favCity)
         {
             // Arrange 
