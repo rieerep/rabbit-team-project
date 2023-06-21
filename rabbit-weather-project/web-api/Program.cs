@@ -81,7 +81,7 @@ namespace web_api
             // GET Method to check number of API calls
             app.MapGet("/add/city/{favoriteCity}", (string favoriteCity) => {
                 Global.IncrementCounter();
-                var city = Weather.Where(x => x.name == favoriteCity.ToLower());
+                var city = Weather.Where(x => x.name == favoriteCity.ToLower()).FirstOrDefault();
                 if (city is null)
                 {
                     return Results.NotFound(new { message = "Could not find city" });
