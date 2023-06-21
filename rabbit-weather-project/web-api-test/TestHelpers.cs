@@ -57,7 +57,7 @@ T		expectedContent)
 			var data = JsonSerializer.Deserialize<T>(serializedResponse);
 			var responseObject = JObject.Parse(serializedResponse); // JObject parses json to string - 
 			Assert.True(responseObject.Count.GetType() == typeof(int));
-			// Assert.Equal(expectedContent, await JsonSerializer.DeserializeAsync<T?>(
+			//Assert.Equal(expectedContent, await JsonSerializer.DeserializeAsync<T?>(
 			//	await response.Content.ReadAsStreamAsync(), _jsonSerializerOptions));
 		}
 

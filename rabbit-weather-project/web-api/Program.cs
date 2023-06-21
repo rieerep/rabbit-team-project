@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
+
 namespace web_api
 {
 
@@ -9,6 +12,7 @@ namespace web_api
         {
             count++;
         }
+
     }
 
     public class Program
@@ -28,6 +32,34 @@ namespace web_api
             builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             var app = builder.Build();
+
+            var Weather = new[]
+            {
+                        new
+                        {
+                            name = "stockholm",
+                            weather = "sunny",
+                            wind = 15.0,
+                            temp = 25
+                        },
+                        new
+                        {
+                            name = "eskilstuna",
+                            weather = "cloudy",
+                            wind = 3.2,
+                            temp = 19
+                        },
+                        new
+                        {
+                            name = "Kiruna",
+                            weather = "very bad",
+                            wind = 100.0,
+                            temp = -23
+                        }
+            };
+
+            
+
             app.UseCors();
 
             // GET Method to check health status
@@ -47,29 +79,24 @@ namespace web_api
             app.MapGet("/currentweather", () =>{ 
                 Global.IncrementCounter();
 
-                return new
-                {
-                    Weather = new[]{
-                        new
-                        {
-                            name = "stockholm",
-                            weather = "sunny",
-                            wind = 15.0
-                        },
-                        new
-                        {
-                            name = "eskilstuna",
-                            weather = "cloudy",
-                            wind = 3.2
-                        }
-                    }
-                };
+                return new { Weather } ;
             });
 
             // GET Method to check number of API calls
             app.MapGet("/callcounter", () => {
                 Global.IncrementCounter();
                 return new { calls = Global.count };
+            });
+
+            // GET Method to check number of API calls
+            app.MapGet("/add/city/{favoriteCity}", (string favoriteCity) => {
+                Global.IncrementCounter();
+                var city = Weather.Where(x => x.name == favoriteCity.ToLower()).FirstOrDefault();
+                if (city is null)
+                {
+                    return Results.NotFound(new { message = "Could not find city" });
+                }
+                return Results.Ok(new { message = $"You added: {favoriteCity}" });
             });
 
             // Configure the HTTP request pipeline.

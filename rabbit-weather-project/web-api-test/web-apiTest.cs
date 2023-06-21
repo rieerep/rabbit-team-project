@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net.Http;
@@ -67,15 +68,24 @@ namespace web_api_test
 				{
 					name = "stockholm",
 					weather = "sunny",
-					wind = 15.0
-				},
+					wind = 15.0,
+                    temp = 25
+                },
 				new
 				{
 					name = "eskilstuna",
 					weather = "cloudy",
-					wind = 3.2
-				}
-				}
+					wind = 3.2,
+                    temp = 19
+                },
+                new
+                {
+                    name = "Kiruna",
+                    weather = "very bad",
+                    wind = 100.0,
+                    temp = -23
+                }
+                }
 			};
 			var stopwatch = Stopwatch.StartNew();
 
@@ -93,10 +103,10 @@ namespace web_api_test
 		//{
 		//	// Arrange 
 		//	var expectedStatusCode = System.Net.HttpStatusCode.OK;
-  //          var expectedContent = new
-  //          {
-  //              count = 5
-  //          };
+        //          var expectedContent = new
+        //          {
+        //              count = 5
+        //          };
 		//	var stopwatch = Stopwatch.StartNew();
 
 
@@ -114,7 +124,6 @@ namespace web_api_test
             // Arrange 
             //var expectedStatusCode = System.Net.HttpStatusCode.OK;
             var expectedMinCalls = 1;
-            var stopwatch = Stopwatch.StartNew();
 
 
             // Act
@@ -129,6 +138,26 @@ namespace web_api_test
             Assert.True(response.IsSuccessStatusCode);//if status code is between 200 and 299 it will return ture and assert is passed
             Assert.True(actualCalls >= expectedMinCalls);//if calls number is equal to or greater than 1 (so not 0) it will pass
 
+        }
+
+        [Theory]
+        [InlineData("stockholm")]
+        public async Task AddsFavoriteCity_WhenRequestedByClient(string favCity)
+        {
+            // Arrange 
+            var stopwatch = Stopwatch.StartNew();
+            var expectedStatusCode = System.Net.HttpStatusCode.OK;
+            
+            var expectedContent = new { message = $"You added: {favCity}" };
+
+
+            // Act
+            var response = await _httpClient.GetAsync($"/add/city/{favCity}");
+
+
+            // Assert
+            //Assert.Equal(expectedContent, actual);
+            await TestHelpers.AssertResponseWithSerializedContentAsync(stopwatch, response, expectedStatusCode, expectedContent);
         }
     }
 }
