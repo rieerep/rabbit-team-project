@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 
 import './App.css'
+import * as css from './css-components/css-app'
+import FavouriteCity from './FavouriteCity'
 
   function clickMe() {
      alert("Button clicked!");
@@ -13,7 +15,9 @@ function ApiCall() {
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios("https://localhost:40400/healthcheck");
+
       console.log(result);
+
       setData(result.data);
     }
     fetchData()
@@ -36,14 +40,16 @@ function ApiCall() {
 }
 
 function ApiStockholmWeather() {
-
   const [weather, setWeather] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       const result = await axios("https://localhost:40400/weatherdata");
+
       console.log(result);
+
       setWeather(result.data);
+
     }
     fetchData()
 
@@ -60,6 +66,7 @@ function ApiStockholmWeather() {
 }
 
 function  App() {
+
   return (
     <>
       <div>
@@ -76,9 +83,11 @@ function  App() {
         <h3>Stockholm weather:</h3>
         <ApiStockholmWeather />
       </div>
-
+      <css.Favcity>
+        <FavouriteCity/>
+      </css.Favcity>
     </>
-  )
+  ) 
 }
 
 export default App

@@ -66,6 +66,28 @@ namespace web_api
                 };
             });
 
+            app.MapGet("/currentcities", () =>{ 
+                Global.IncrementCounter();
+
+                return new[] {
+                        new
+                        {
+                            name = "stockholm",
+                            weather = "sunny",
+                            wind = 15.0,
+                            temp = 27
+                        },
+                        new
+                        {
+                            name = "eskilstuna",
+                            weather = "cloudy",
+                            wind = 3.2,
+                            temp = 19
+                        }
+                    
+                };
+            });
+
             // GET Method to check number of API calls
             app.MapGet("/callcounter", () => {
                 Global.IncrementCounter();
