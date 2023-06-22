@@ -14,8 +14,17 @@ This is a group project where we've built a React client along with a minimal AP
 - JavaScript (React.js)
 - Minimal API (ASP.NET Core)
 
+## API Endpoints
+| URI | Method | Description |
+| ------ | ------ | -- |
+| /healthcheck | GET | Indicates that the requested succeeded |
+| /weatherdata | GET | Check weather temp |
+| /currentweather | GET | Check weather for all cities |
+| /callcounter | GET | Check number of API calls made |
+| /add/city/{favoriteCity} | GET | Check weather for favorited city |
+
 ## Structure
-The project is structured from a TDD standpoint, where there is a main project and a unit testing project inside the same solution. Before adding new functionality to the main project test methods are created and tested inside the unit testing project.  Depending on the results of the tests we either continue development or keep running tests until we're satisfied with the results. We make sure to commit every result to the repository, whether it fails or succeeds. We also make sure that objects and methods are only created depending on the current needs.
+The project is built from a TDD perspective, where there is a main project and a unit testing project inside the same solution. Before adding new functionality to the main project test methods are created and tested inside the unit testing project.  Depending on the results of the tests we either continue development or keep running tests until we're satisfied with the results. We make sure to commit every result to the repository, whether it fails or succeeds. We also make sure that objects and methods are only created depending on the current needs.
 
 As this is a project that uses an API we also make sure that the tests only use objects similar to the format of JSON because the API will always return a serialized JSON.
 
