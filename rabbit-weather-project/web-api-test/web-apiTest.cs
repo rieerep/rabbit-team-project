@@ -145,6 +145,7 @@ namespace web_api_test
         public async Task AddsFavoriteCity_WhenRequestedByClient(string favCity)
         {
             // Arrange 
+
             var stopwatch = Stopwatch.StartNew();
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
             
